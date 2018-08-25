@@ -1,5 +1,6 @@
 package br.edu.ifsp.scl.sdm.ciclodevida;
 
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -29,12 +30,41 @@ public class MainActivity extends AppCompatActivity {
         telefoneEditText.setHint("Digite aqui seu telefone");
         telefoneEditText.setInputType(InputType.TYPE_CLASS_PHONE);
 
+        if (savedInstanceState != null) {
+            String telefone = savedInstanceState.getString("TELEFONE", null);
+            if (telefone != null)
+            {
+                telefoneEditText.setText(telefone);
+            }
+        }
+
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
         linearLayout.addView(telefoneTextView);
         linearLayout.addView(telefoneEditText);
 
         // iniciando o ciclo de vida COMPLETO
         Log.v(CDV_LOGCAT_TAG, "onCreate: Iniciando ciclo COMPLETO");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Salvar os dados de estado dinâmico
+        outState.putString("TELEFONE",telefoneEditText.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            String telefone = savedInstanceState.getString("TELEFONE", null);
+            if (telefone != null)
+            {
+                telefoneEditText.setText(telefone);
+            }
+        }
     }
 
     @Override
