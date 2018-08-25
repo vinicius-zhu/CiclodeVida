@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.Layout;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         telefoneEditText.setHint("Digite aqui seu telefone");
         telefoneEditText.setInputType(InputType.TYPE_CLASS_PHONE);
 
+        /*
         if (savedInstanceState != null) {
             String telefone = savedInstanceState.getString("TELEFONE", null);
             if (telefone != null)
@@ -37,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 telefoneEditText.setText(telefone);
             }
         }
+        */
 
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
-        linearLayout.addView(telefoneTextView);
-        linearLayout.addView(telefoneEditText);
+        linearLayout.addView(telefoneTextView, 4);
+        linearLayout.addView(telefoneEditText, 5);
 
         // iniciando o ciclo de vida COMPLETO
         Log.v(CDV_LOGCAT_TAG, "onCreate: Iniciando ciclo COMPLETO");
@@ -64,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
             {
                 telefoneEditText.setText(telefone);
             }
+        }
+    }
+
+    public void fecharTela(View botao){
+        if (botao.getId() == R.id.button){
+            finish();
         }
     }
 
